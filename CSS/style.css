@@ -1,0 +1,8 @@
+.title {
+    font-family: "Press Start 2P", cursive;
+    -webkit-text-stroke: 0.5px white;
+    text-align: center;
+    width: 100%;
+    font-size: 45px;
+    top: 300px;
+}
