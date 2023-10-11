@@ -7,6 +7,14 @@
     font-size: 45px;
     top: 300px;
 }
+a{
+    text-decoration: none;
+    color: black;
+}
+a:hover{
+    text-decoration: underline;
+    color: black;
+}
 .botones {
     display: flex;
     flex-direction: column;
