@@ -47,3 +47,26 @@ a:hover{
     line-height: 50px;
     font-size: 35px;
   }
+
+  /*CSS Creditos*/
+
+  .titulo-creditos{
+    font-family: "Press Start 2P", cursive;
+    -webkit-text-stroke: 0.5px white;
+    text-align: center;
+    width: 100%;
+    font-size: 40px;
+}
+  .creditos {
+    position: relative;
+  }
+  .contenido-creditos{
+    font-family: "Press Start 2P", cursive;
+    -webkit-text-stroke: 0.5px white;
+    text-align: center;
+    width: 100%;
+    font-size: 20px;
+}
+  .credito {
+    text-align: center;
+  }
