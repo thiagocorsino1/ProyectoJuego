@@ -59,6 +59,8 @@ a:hover{
 }
   .creditos {
     position: relative;
+    top: 100%;
+    animation: AnimacionCreditos 15s linear normal;
   }
   .contenido-creditos{
     font-family: "Press Start 2P", cursive;
@@ -69,4 +71,12 @@ a:hover{
 }
   .credito {
     text-align: center;
+  }
+  @keyframes AnimacionCreditos {
+    0% {
+      top: 100%; /* Comienzan debajo de la pantalla */
+    }
+    100% {
+      top: -60%; /* Se detienen en la parte superior de la pantalla */
+    }
   }
