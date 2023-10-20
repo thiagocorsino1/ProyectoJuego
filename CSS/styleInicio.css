@@ -1,4 +1,9 @@
 /*CSS Inicio*/
+body{
+  background-image: url("../IMG/fondo.png");
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
 .titulo-inicio {
     font-family: "Press Start 2P", cursive;
     -webkit-text-stroke: 0.5px white;

@@ -1,4 +1,9 @@
 /*CSS Creditos*/
+body, html {
+  background-color: black;
+  height: 100%;
+  overflow: hidden;
+}
 
 .titulo-creditos{
     font-family: "Press Start 2P", cursive;
