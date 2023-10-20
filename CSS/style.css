@@ -1,0 +1,13 @@
+body{
+    background-image: url("../IMG/fondo.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+.contenedor {
+    text-align: center;
+    position: relative;
+    width: 1350px;
+    height: 635px;
+    border: 1px solid white
+}
