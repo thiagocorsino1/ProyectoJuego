@@ -6,7 +6,7 @@ const imagen = document.getElementById("imagen");
 const imgMovDER = "IMG/moverseDER.png";
 const imageOriginal = "IMG/personajeEstatico.png";
 const imgMovIZQ = "IMG/moverseIZQ.png";
-const imgAgachado = "IMG/gokuagachado.png";
+const imgAgachado = "IMG/personajeAgachado.png";
 
 let teclaSPresionada = false;
 let pjAgachado = false;
@@ -20,12 +20,25 @@ document.addEventListener('keydown', function(event) {
     if (event.key === "d" || event.key === "D") {
       moverPersonaje(personaje1, 10,imgMovDER);
     }
+    if (event.key === "s" || event.key === "S") {
+        teclaSPresionada = true;
+        imagen.src = imgAgachado;
+        agachada();
+    }
 });
 
 document.addEventListener('keyup', (event) => {
-    // Verificar si la tecla que se soltó es la que utilizaste para el cambio
     if (event.key === 'a' || event.key === 'A' || event.key === 'd' || event.key === 'D') {
       imagen.src = imageOriginal;  // Volver a la imagen original al soltar la tecla
+    }
+    if (event.key === 's' || event.key === 'S') {
+        teclaSPresionada = false;
+        // Cancelar el temporizador de agachamiento
+        clearTimeout(tiempoAgachado);
+        pjAgachado = false;
+        imagen.src = imageOriginal;
+        // Restablecer la escala en el eje Y a 1 y la translación vertical a 0
+        imagen.style.transform = "scaleY(1) translateY(0)";
     }
 });
 
@@ -48,7 +61,6 @@ function moverPersonaje(personaje, valorActual, img) {
 }
 
 function agachada(){
-    // Establece que el personaje está agachado
     pjAgachado = true;
     // Ajusta la altura del personaje agachado según tus necesidades
     const pjAltura = 0.7; // Reduce la altura a la mitad (ajusta según sea necesario)
