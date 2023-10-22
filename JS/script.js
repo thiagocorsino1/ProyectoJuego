@@ -7,10 +7,12 @@ const imgMovDER = "IMG/moverseDER.png";
 const imageOriginal = "IMG/personajeEstatico.png";
 const imgMovIZQ = "IMG/moverseIZQ.png";
 const imgAgachado = "IMG/personajeAgachado.png";
+const imgSalto = "IMG/moverseDER.png";
 
 let teclaSPresionada = false;
 let pjAgachado = false;
 let tiempoAgachado;
+let saltando = false;
 
 document.addEventListener('keydown', function(event) { 
     var tecla = event.keyCode;
@@ -77,4 +79,30 @@ function agachada(){
     }
     // Iniciar el bucle de animación para mantener al personaje agachado
     agachadoFrame();
+}
+
+function Saltar() {
+    if (!saltando) {
+        saltando = true;
+        imagen.src = imgSalto;
+        //obtiene la posición vertical inicial de la imagen
+        const inicioY = imagen.getBoundingClientRect().top;
+        const alturaSalto = 220;//define la altura del salto
+        let ubicacionY = inicioY;//variable para ubicar la posición vertical actual
+        const duracionSalto = 500;//define la duración del salto
+        //establece un intervalo de tiempo que controla la animación de salto
+        const intervaloSalto = setInterval(function () {
+            //reduce la posición vertical actual para simular el salto
+            ubicacionY -= 2;
+            //actualiza la transformación CSS para cambiar la posición vertical de la imagen
+            imagen.style.transform = `translateY(${ubicacionY - inicioY}px)`;
+            //si la posición vertical actual alcanza la altura máxima del salto
+            if (ubicacionY <= inicioY - alturaSalto) {
+                clearInterval(intervaloSalto);//detiene el intervalo de salto
+                imagen.src = imageOriginal;
+                imagen.style.transform = "translateY(0)";//restablece la posición vertical de la imagen
+                saltando = false;
+            }
+        }, duracionSalto / (alturaSalto / 2));
+    }
 }
