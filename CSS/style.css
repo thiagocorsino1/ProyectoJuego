@@ -5,22 +5,22 @@ body{
     background-size: 100%;
 }
 
-.contenedor {
+#contenedor {
     text-align: center;
     position: relative;
     width: 1350px;
     height: 635px;
-    border: 1px solid white
+    border: 1px solid white;
 }
 /**/
 
-.personaje1{
+#personaje1{
     text-align: center;
     position: absolute;
     top: 320px;
     left: 500px;
 }
-.personaje1 img{
+#personaje1 img{
     width: 140px;
     height: 280px;
 }
