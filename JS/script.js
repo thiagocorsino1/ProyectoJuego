@@ -27,6 +27,9 @@ document.addEventListener('keydown', function(event) {
         imagen.src = imgAgachado;
         agachada();
     }
+    if (event.key === "w" || event.key === "W") {
+        Saltar();
+    }
 });
 
 document.addEventListener('keyup', (event) => {
