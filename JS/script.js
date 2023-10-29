@@ -1,6 +1,8 @@
 //referencias del personaje y la imagen
 var personaje1 = document.getElementById('personaje1');
+var personaje2 = document.getElementById('personaje2');
 const imagen = document.getElementById("imagen");
+const imagen2 = document.getElementById("imagen2");
 
 //variables de imagenes a utilizar
 const imgMovDER = "IMG/moverseDER.png";
@@ -13,6 +15,8 @@ let teclaSPresionada = false;
 let pjAgachado = false;
 let tiempoAgachado;
 let saltando = false;
+let vidaJugador1 = 100;
+let vidaJugador2 = 100;
 
 document.addEventListener('keydown', function(event) { 
     var tecla = event.keyCode;
@@ -108,4 +112,13 @@ function Saltar() {
             }
         }, duracionSalto / (alturaSalto / 2));
     }
+}
+
+function disminuirVida(vidaJugador, contadorVida, barravida) {
+    //verifica si la vida del jugador es menor que cero
+    if (vidaJugador < 0) vidaJugador = 0;
+    //actualiza el ancho visual de la barra de vida en el DOM
+    document.getElementById(barravida).style.width = vidaJugador + '%';
+    //actualiza el marcador de vida en el DOM con el valor actualizado
+    document.getElementById(contadorVida).innerText = vidaJugador;
 }
