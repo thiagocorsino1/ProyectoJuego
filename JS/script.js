@@ -122,3 +122,21 @@ function disminuirVida(vidaJugador, contadorVida, barravida) {
     //actualiza el marcador de vida en el DOM con el valor actualizado
     document.getElementById(contadorVida).innerText = vidaJugador;
 }
+
+function crearEsfera(personajeid, n, dir, PJReceptor) {
+    //obtiene el contenedor de la esfera y el elemento del personaje
+    const esferaContainer = document.getElementById('esfera-container');
+    const personaje = document.getElementById(personajeid);
+    //crea un nuevo elemento div que representa la esfera
+    const esfera = document.createElement('div');
+    esfera.classList.add('esfera'); //añade la clase esfera al elemento div
+    esfera.style.display = 'block'; //asegura que la esfera sea visible
+    esferaContainer.appendChild(esfera); //agrega la esfera al contenedor
+    //obtiene las dimensiones del personaje
+    const personajeDimension = personaje.getBoundingClientRect();
+    //posiciona la esfera con respecto al personaje
+    esfera.style.top = `${personajeDimension.top + 120}px`;
+    esfera.style.left = `${personajeDimension.right-n}px`;
+    //llama a la función moverEsfera para iniciar el movimiento de la esfera
+    moverEsfera(esfera, dir, PJReceptor);
+}
