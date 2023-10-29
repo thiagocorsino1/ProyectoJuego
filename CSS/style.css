@@ -12,7 +12,7 @@ body{
     height: 635px;
     border: 1px solid white;
 }
-/**/
+/*Posicion y dimensiones de los personajes*/
 
 #personaje1{
     text-align: center;
@@ -34,4 +34,51 @@ body{
 #personaje2 img{
     width: 140px;
     height: 280px;
+}
+
+/*Marcadores de vida*/
+
+.contador-vida {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 5px;
+    color: white;
+} 
+
+.marcador {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: 10px;
+    width: 600px;
+}
+
+.marcador1 {
+    left: 10px;
+    background-color: red;
+}
+
+.marcador2 {
+    right: 10px;
+    background-color: red;
+}
+
+.nombre-jugador {
+    font-size: 20px;
+    margin-bottom: 5px;
+    color: white;
+}
+
+.barra-vida {
+    width: 100%;
+    height: 20px; 
+    background-color: #ccc; 
+    border: 1px solid #000;
+}
+
+.vida {
+    width: 100%;
+    height: 100%;
+    background-color: white;
 }
