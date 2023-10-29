@@ -10,6 +10,7 @@ const imageOriginal = "IMG/personajeEstatico.png";
 const imgMovIZQ = "IMG/moverseIZQ.png";
 const imgAgachado = "IMG/personajeAgachado.png";
 const imgSalto = "IMG/moverseDER.png";
+const imgPoder= "IMG/personajePoder.png";
 
 let teclaSPresionada = false;
 let pjAgachado = false;
@@ -17,6 +18,7 @@ let tiempoAgachado;
 let saltando = false;
 let vidaJugador1 = 100;
 let vidaJugador2 = 100;
+let ultimaEjecucionQ = 0;
 
 document.addEventListener('keydown', function(event) { 
     var tecla = event.keyCode;
@@ -34,10 +36,25 @@ document.addEventListener('keydown', function(event) {
     if (event.key === "w" || event.key === "W") {
         Saltar();
     }
+    if (event.key === "q" || event.key === "Q") {
+        imagen.src = imgPoder;
+        const currentTime = Date.now();
+        // Verificar si ha pasado suficiente tiempo desde la última ejecución
+        if (currentTime - ultimaEjecucionQ >= 300) { // Permitir ejecución cada 5000 milisegundos (5 segundos)
+        // Ejecutar la función asociada a la tecla "E"
+        const personajeid='personaje1';
+        const PJReceptor='personaje2';
+	    const barravida2 = 'vidaJugador2';
+        const contadorVida2 = 'contadorVida2';
+        crearEsfera(personajeid, 0, "+", PJReceptor, barravida2, contadorVida2);
+        // Actualizar el tiempo de última ejecución
+        ultimaEjecucionQ = currentTime;
+        }
+    }
 });
 
 document.addEventListener('keyup', (event) => {
-    if (event.key === 'a' || event.key === 'A' || event.key === 'd' || event.key === 'D') {
+    if (event.key === 'a' || event.key === 'A' || event.key === 'd' || event.key === 'D' || event.key === 'q' || event.key === 'Q') {
       imagen.src = imageOriginal;  // Volver a la imagen original al soltar la tecla
     }
     if (event.key === 's' || event.key === 'S') {
