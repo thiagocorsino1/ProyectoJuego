@@ -220,4 +220,17 @@ function ejecutarGolpe() {
     // Comenzar el movimiento hacia la derecha y registrar el tiempo de inicio
     const tiempoInicial = Date.now();
     crearGolpe(tiempoInicial);
+    const barravida2 = 'vidaJugador2';
+    const contadorVida2 = 'contadorVida2';
+    verificarGolpe(personaje1, personaje2, barravida2, contadorVida2);
+}
+
+function verificarGolpe(personajeEmisor, personajeReceptor, barravida, contadorVida) {
+    const pjEmisor = personajeEmisor.getBoundingClientRect();
+    const pjReceptor = personajeReceptor.getBoundingClientRect();
+    // Verificar si caja1 está a la izquierda y cerca de caja2
+    if (pjEmisor.right >= pjReceptor.left && pjEmisor.left <= pjReceptor.right) {
+        vidaJugador2 -=3;
+        disminuirVida(vidaJugador2, contadorVida, barravida); // Caja1 golpea a caja2, reducir vida
+    }
 }
