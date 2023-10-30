@@ -19,6 +19,7 @@ let saltando = false;
 let vidaJugador1 = 100;
 let vidaJugador2 = 100;
 let ultimaEjecucionQ = 0;
+let ultimaEjecucionE = 0;
 
 document.addEventListener('keydown', function(event) { 
     var tecla = event.keyCode;
@@ -50,6 +51,18 @@ document.addEventListener('keydown', function(event) {
         //actualizar el tiempo de última ejecución
         ultimaEjecucionQ = currentTime;
         }
+    }
+    if (event.key === 'e' || event.key === 'E') {
+        imagen.src = imgPoder;
+       //obtener el tiempo actual
+       const tiempoActual = Date.now();
+       //verificar si ha pasado suficiente tiempo desde la última ejecución
+       if (tiempoActual - ultimaEjecucionE >= 500) { // Permitir ejecución cada 5000 milisegundos (5 segundos)
+            //ejecutar la función asociada a la tecla "E"
+            ejecutarGolpe();
+            //actualizar el tiempo de última ejecución
+            ultimaEjecucionE = tiempoActual;
+       }
     }
 });
 
