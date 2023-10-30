@@ -215,3 +215,9 @@ function crearGolpe(tiempoInicial) {
         imagen.src = imageOriginal;
     }
 }
+
+function ejecutarGolpe() {
+    // Comenzar el movimiento hacia la derecha y registrar el tiempo de inicio
+    const tiempoInicial = Date.now();
+    crearGolpe(tiempoInicial);
+}
