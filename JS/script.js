@@ -38,16 +38,16 @@ document.addEventListener('keydown', function(event) {
     }
     if (event.key === "q" || event.key === "Q") {
         imagen.src = imgPoder;
+        //obtener el tiempo actual
         const currentTime = Date.now();
-        // Verificar si ha pasado suficiente tiempo desde la última ejecución
+        //verificar si ha pasado suficiente tiempo desde la última ejecución
         if (currentTime - ultimaEjecucionQ >= 300) { // Permitir ejecución cada 5000 milisegundos (5 segundos)
-        // Ejecutar la función asociada a la tecla "E"
         const personajeid='personaje1';
         const PJReceptor='personaje2';
 	    const barravida2 = 'vidaJugador2';
         const contadorVida2 = 'contadorVida2';
         crearEsfera(personajeid, 0, "+", PJReceptor, barravida2, contadorVida2);
-        // Actualizar el tiempo de última ejecución
+        //actualizar el tiempo de última ejecución
         ultimaEjecucionQ = currentTime;
         }
     }
@@ -195,4 +195,23 @@ function moverEsfera(esfera, dir, PJReceptor, barravida, contadorVida) {
             clearInterval(moveInterval); // Detiene el intervalo de movimiento
         }
     }, 20); // La función de intervalo se ejecuta cada 20 milisegundos
+}
+
+function crearGolpe(tiempoInicial) {
+    const tiempoActual = Date.now();
+    const duracion = 200; // Duración en milisegundos (200 ms = 0.2 segundos)
+    // Calcular el progreso del movimiento
+    const progreso = Math.min(1, (tiempoActual - tiempoInicial) / duracion);
+    // Calcular la nueva posición basada en el progreso
+    const PosicionNueva = Math.min(progreso * 80, 80); // 80 es la cantidad máxima de movimiento
+    personaje1.style.transform = `translateX(${PosicionNueva}px)`;
+    // Continuar moviendo si no se alcanza la duración
+    if (progreso < 1) {
+        requestAnimationFrame(() => crearGolpe(tiempoInicial));
+    } else {
+        // Se alcanzó la duración, volver a la posición original
+        personaje1.style.transform = 'translateX(0)';
+        //isMoving = false;
+        imagen.src = imageOriginal;
+    }
 }
