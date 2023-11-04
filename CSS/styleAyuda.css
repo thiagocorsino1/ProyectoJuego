@@ -6,3 +6,14 @@ body {
     min-height: 100vh;
     margin: 0;
 }
+
+.link-inicio {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    text-decoration: none;
+    color: white;
+    padding: 8px 12px;
+    background: black;
+    border-radius: 5px;
+}
