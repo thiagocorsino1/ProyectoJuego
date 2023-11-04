@@ -1,4 +1,8 @@
 body {
     background-color: orange;
     font-family: "Press Start 2P", cursive;
+    text-align: center;
+    position: relative;
+    min-height: 100vh;
+    margin: 0;
 }
