@@ -35,3 +35,14 @@ body, html {
       top: -60%; /* Se detienen en la parte superior de la pantalla */
     }
   }
+
+  .link-inicio {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    text-decoration: none;
+    color: black;
+    padding: 8px 12px;
+    background: white;
+    border-radius: 5px;
+}
