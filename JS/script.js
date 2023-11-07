@@ -24,10 +24,10 @@ let ultimaEjecucionE = 0;
 document.addEventListener('keydown', function(event) { 
     var tecla = event.keyCode;
     if (event.key === "a" || event.key === "A") {
-      moverPersonaje(personaje1, -30, imgMovIZQ);
+      moverPersonaje(personaje1, personaje2, -30, imgMovIZQ);
     }
     if (event.key === "d" || event.key === "D") {
-      moverPersonaje(personaje1, 10,imgMovDER);
+      moverPersonaje(personaje1, personaje2, 10,imgMovDER);
     }
     if (event.key === "s" || event.key === "S") {
         teclaSPresionada = true;
@@ -81,20 +81,26 @@ document.addEventListener('keyup', (event) => {
     }
 });
 
-function moverPersonaje(personaje, valorActual, img) {
+function moverPersonaje(personaje1, personaje2, valorActual, img) {
     // Si la tecla S esta presionada, no activa la funcion para moverse hacia los costados
     if(!teclaSPresionada){
         imagen.src = img;
         // Obtener el rectángulo que describe la posición y dimensiones de la caja
-        var cajaPosicion = personaje.getBoundingClientRect();
+        var cajaPosicion = personaje1.getBoundingClientRect();
+        var cajaPosicion2 = personaje2.getBoundingClientRect();
+        var distanciaEntrePersonajes = cajaPosicion2.left - cajaPosicion.right;
+        // Si el personaje1 se mueve a la derecha y está cerca del personaje2, detener el movimiento
+        if (valorActual > 0 && distanciaEntrePersonajes < 1) { // Puedes ajustar el valor de la distancia según tu escenario
+            return; // Evita que el personaje1 se mueva más hacia la derecha
+        }
         // Obtener el rectángulo que describe la posición y dimensiones del contenedor
-        var limiteContenedor = document.getElementById('contenedor').getBoundingClientRect();
+        var limiteContenedor = document.getElementById('contenedor').getBoundingClientRect(); 
         // Calcular la nueva posición horizontal de la caja sumando el desplazamiento (valorActual) al valor actual
         var nuevaPosicion = cajaPosicion.left + valorActual;
         // Verifica los límites del contenedor
         if (nuevaPosicion >= limiteContenedor.left && nuevaPosicion <= limiteContenedor.right - cajaPosicion.width){
         // Si la nueva posición está dentro de los límites del contenedor, se actualiza la posición de la caja horizontalmente
-        personaje.style.left = nuevaPosicion + 'px';
+        personaje1.style.left = nuevaPosicion + 'px';
       }
     }
 }
