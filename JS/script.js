@@ -381,3 +381,12 @@ function saltarAleatorio() {
 function agacharseAleatorio() {
     agachada2(imagen2);
 }
+
+function lanzarEsferaAleatorio() {
+    const personajeid = 'personaje2';
+    const PJReceptor = 'personaje1';
+    const barravida = 'vidaJugador1';
+    const contadorVida = 'contadorVida1';
+    const direccion = "-"; // Dirección fija: izquierda
+    crearEsfera2(personajeid, 170, direccion, PJReceptor, barravida, contadorVida, imagen2, imgPoder);
+}
