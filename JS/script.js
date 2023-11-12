@@ -411,3 +411,6 @@ function accionesAleatoriasPersonaje2() {
     const accionAleatoria = accionesPosibles[Math.floor(Math.random() * accionesPosibles.length)];
     accionAleatoria();
 }
+
+// Ejecutar acciones aleatorias del personaje2 cada cierto tiempo
+setInterval(accionesAleatoriasPersonaje2, 900);
