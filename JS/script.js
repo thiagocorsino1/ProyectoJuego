@@ -367,3 +367,9 @@ function agachada2(imagen) {
     // Iniciar el bucle de animación
     agachadoFrame();
 }
+
+function moverAleatorio() {
+    const movimientos = [-90, 60];
+    const movimientoAleatorio = movimientos[Math.floor(Math.random() * movimientos.length)];
+    moverPersonaje2(movimientoAleatorio, movimientoAleatorio > 0 ? imgMovDER : imgMovIZQ, imagen2);
+}
