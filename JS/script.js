@@ -377,3 +377,7 @@ function moverAleatorio() {
 function saltarAleatorio() {
     Saltar(imagen2, imgSalto2, imageOriginal2);
 }
+
+function agacharseAleatorio() {
+    agachada2(imagen2);
+}
