@@ -390,3 +390,12 @@ function lanzarEsferaAleatorio() {
     const direccion = "-"; // Dirección fija: izquierda
     crearEsfera2(personajeid, 170, direccion, PJReceptor, barravida, contadorVida, imagen2, imgPoder);
 }
+
+function ejecutarGolpeAleatorio() {
+    // Comenzar el movimiento hacia la derecha y registrar el tiempo de inicio
+    const tiempoInicial = Date.now();
+    crearGolpe(tiempoInicial, personaje2, -80, imgGolpe2, imagen2, imageOriginal2);
+    const barravida1 = 'vidaJugador1';
+    const contadorVida1 = 'contadorVida1';
+    verificarGolpe(personaje2, personaje1, barravida1, contadorVida1, 20);//ultimo item para cambiar la vida a restar
+}
