@@ -247,12 +247,12 @@ function ejecutarGolpe(personaje, posicion, imgG, imagen, imageOriginal) {
     verificarGolpe(personaje1, personaje2, barravida2, contadorVida2, 5);
 }
 
-function verificarGolpe(personajeEmisor, personajeReceptor, barravida, contadorVida) {
+function verificarGolpe(personajeEmisor, personajeReceptor, barravida, contadorVida, N) {
     const pjEmisor = personajeEmisor.getBoundingClientRect();
     const pjReceptor = personajeReceptor.getBoundingClientRect();
     // Verificar si caja1 está a la izquierda y cerca de caja2
     if (pjEmisor.right >= pjReceptor.left && pjEmisor.left <= pjReceptor.right) {
-        vidaJugador2 -=3;
+        vidaJugador2 -=N;
         disminuirVida(vidaJugador2, contadorVida, barravida); // Caja1 golpea a caja2, reducir vida
     }
 }
