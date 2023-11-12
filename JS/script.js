@@ -299,3 +299,43 @@ function crearEsfera2(personajeid, n, dir, PJReceptor, barravida, contadorVida, 
     //llama a la función moverEsfera para iniciar el movimiento de la esfera
     moverEsfera2(esfera, dir, PJReceptor, barravida, contadorVida);
 }
+
+function moverEsfera2(esfera, dir, PJReceptor, barravida, contadorVida) {
+    const velocidadEsfera = 15;
+    let position = parseFloat(esfera.style.left) || 0;
+    //establece un intervalo de tiempo para el movimiento continuo de la esfera
+    const moveInterval = setInterval(() => {
+        //actualiza la posición de la esfera basada en la dirección
+        if (dir === "+") {
+            position += velocidadEsfera; //mueve la esfera hacia la derecha
+        } else if (dir === "-") {
+            position -= velocidadEsfera; //mueve la esfera hacia la izquierda
+        }
+        esfera.style.left = `${position}px`; //establece la posición horizontal de la esfera
+        //obtiene el ancho del contenedor de esferas
+        const containerWidth = document.getElementById('esfera-container').offsetWidth;
+        //obtiene las posiciones de la esfera y el personaje receptor
+        const esferaDimension = esfera.getBoundingClientRect();
+        const PJDimension = document.getElementById(PJReceptor).getBoundingClientRect();
+        //verifica si la esfera choca con el personaje receptor
+        if (
+            esferaDimension.right >= PJDimension.left &&
+            esferaDimension.left <= PJDimension.right &&
+            esferaDimension.bottom >= PJDimension.top &&
+            esferaDimension.top <= PJDimension.bottom
+        ) {
+            // La esfera ha colisionado con el personaje receptor
+    
+            vidaJugador2 -= 2; // Reduce la vida del jugador receptor
+            disminuirVida(vidaJugador2, contadorVida, barravida); // Actualiza la barra de vida del jugador receptor
+            esfera.remove(); // Elimina la esfera
+            clearInterval(moveInterval); // Detiene el intervalo de movimiento
+        }
+
+        // Verifica si la esfera ha alcanzado el borde derecho del contenedor
+        if (position > containerWidth) {
+            esfera.remove(); // Elimina la esfera
+            clearInterval(moveInterval); // Detiene el intervalo de movimiento
+        }
+    }, 20);// La función de intervalo se ejecuta cada 20 milisegundos
+}
