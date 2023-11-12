@@ -256,3 +256,27 @@ function verificarGolpe(personajeEmisor, personajeReceptor, barravida, contadorV
         disminuirVida(vidaJugador2, contadorVida, barravida); // Caja1 golpea a caja2, reducir vida
     }
 }
+
+function moverPersonaje2(valorActual, img, imagen) {
+    imagen.src = img;
+    // Obtener el rectángulo que describe la posición y dimensiones de la caja del personaje1
+    var cajaPosicion1 = personaje1.getBoundingClientRect();
+    // Obtener el rectángulo que describe la posición y dimensiones de la caja del personaje2
+    var cajaPosicion2 = personaje2.getBoundingClientRect();
+
+    // Si el personaje2 se mueve a la derecha y está cerca del personaje1, detener el movimiento
+        
+    if (valorActual < 0 && cajaPosicion2.left - cajaPosicion1.right < 1) {
+        return; // Evita que el personaje2 se mueva más hacia la izquierda
+    }
+    // Obtener el rectángulo que describe la posición y dimensiones del contenedor
+    var limiteContenedor = document.getElementById('contenedor').getBoundingClientRect();
+    // Calcular la nueva posición horizontal de la caja sumando el desplazamiento (valorActual) al valor actual
+    var nuevaPosicion = cajaPosicion2.left + valorActual;
+
+    // Verificar los límites del contenedor
+    if (nuevaPosicion >= limiteContenedor.left && nuevaPosicion <= limiteContenedor.right - cajaPosicion2.width) {
+        // Si la nueva posición está dentro de los límites del contenedor, se actualiza la posición de la caja horizontalmente
+        personaje2.style.left = nuevaPosicion + 'px';
+    }
+}
