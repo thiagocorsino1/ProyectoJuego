@@ -162,7 +162,8 @@ function disminuirVida(vidaJugador, contadorVida, barravida) {
     document.getElementById(contadorVida).innerText = vidaJugador;
 }
 
-function crearEsfera(personajeid, n, dir, PJReceptor, barravida, contadorVida) {
+function crearEsfera(personajeid, n, dir, PJReceptor, barravida, contadorVida, imagen, img) {
+    imagen.src = img;
     //obtiene el contenedor de la esfera y el elemento del personaje
     const esferaContainer = document.getElementById('esfera-container');
     const personaje = document.getElementById(personajeid);
@@ -174,7 +175,7 @@ function crearEsfera(personajeid, n, dir, PJReceptor, barravida, contadorVida) {
     //obtiene las dimensiones del personaje
     const personajeDimension = personaje.getBoundingClientRect();
     //posiciona la esfera con respecto al personaje
-    esfera.style.top = `${personajeDimension.top + 120}px`;
+    esfera.style.top = `${personajeDimension.top + 105}px`;
     esfera.style.left = `${personajeDimension.right-n}px`;
     //llama a la función moverEsfera para iniciar el movimiento de la esfera
     moverEsfera(esfera, dir, PJReceptor, barravida, contadorVida);
