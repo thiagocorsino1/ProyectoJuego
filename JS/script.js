@@ -280,3 +280,22 @@ function moverPersonaje2(valorActual, img, imagen) {
         personaje2.style.left = nuevaPosicion + 'px';
     }
 }
+
+function crearEsfera2(personajeid, n, dir, PJReceptor, barravida, contadorVida, imagen, img) {
+    imagen.src = img;
+    //obtiene el contenedor de la esfera y el elemento del personaje
+    const esferaContainer = document.getElementById('esfera-container');
+    const personaje = document.getElementById(personajeid);
+    //crea un nuevo elemento div que representa la esfera
+    const esfera = document.createElement('div');
+    esfera.classList.add('esfera'); //añade la clase esfera al elemento div
+    esfera.style.display = 'block'; //asegura que la esfera sea visible
+    esferaContainer.appendChild(esfera); //agrega la esfera al contenedor
+    //obtiene las dimensiones del personaje
+    const personajeDimension = personaje.getBoundingClientRect();
+    //posiciona la esfera con respecto al personaje
+    esfera.style.top = `${personajeDimension.top + 105}px`;
+    esfera.style.left = `${personajeDimension.right-n}px`;
+    //llama a la función moverEsfera para iniciar el movimiento de la esfera
+    moverEsfera2(esfera, dir, PJReceptor, barravida, contadorVida);
+}
