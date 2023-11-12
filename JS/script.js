@@ -11,6 +11,10 @@ const imgMovIZQ = "IMG/moverseIZQ.png";
 const imgAgachado = "IMG/personajeAgachado.png";
 const imgSalto = "IMG/moverseDER.png";
 const imgPoder= "IMG/personajePoder.png";
+const imgGolpe="IMG/personajePuño.png";
+const imgGolpe2="IMG/personajePuño2.png";
+const imageOriginal2 = "IMG/personajeEstatico2.png";
+const imgSalto2="IMG/moverseIZQ.png";
 
 let teclaSPresionada = false;
 let pjAgachado = false;
@@ -24,18 +28,18 @@ let ultimaEjecucionE = 0;
 document.addEventListener('keydown', function(event) { 
     var tecla = event.keyCode;
     if (event.key === "a" || event.key === "A") {
-      moverPersonaje(personaje1, personaje2, -30, imgMovIZQ);
+      moverPersonaje(personaje1, personaje2, -30, imgMovIZQ, imagen);
     }
     if (event.key === "d" || event.key === "D") {
-      moverPersonaje(personaje1, personaje2, 10,imgMovDER);
+      moverPersonaje(personaje1, personaje2, 10,imgMovDER, imagen);
     }
     if (event.key === "s" || event.key === "S") {
         teclaSPresionada = true;
         imagen.src = imgAgachado;
-        agachada();
+        agachada(imagen);
     }
     if (event.key === "w" || event.key === "W") {
-        Saltar();
+        Saltar(imagen, imgSalto);
     }
     if (event.key === "q" || event.key === "Q") {
         imagen.src = imgPoder;
@@ -53,7 +57,7 @@ document.addEventListener('keydown', function(event) {
         }
     }
     if (event.key === 'e' || event.key === 'E') {
-        imagen.src = imgPoder;
+        imagen.src = imgGolpe;
        //obtener el tiempo actual
        const tiempoActual = Date.now();
        //verificar si ha pasado suficiente tiempo desde la última ejecución
@@ -81,7 +85,7 @@ document.addEventListener('keyup', (event) => {
     }
 });
 
-function moverPersonaje(personaje1, personaje2, valorActual, img) {
+function moverPersonaje(personaje1, personaje2, valorActual, img, imagen) {
     // Si la tecla S esta presionada, no activa la funcion para moverse hacia los costados
     if(!teclaSPresionada){
         imagen.src = img;
@@ -104,8 +108,7 @@ function moverPersonaje(personaje1, personaje2, valorActual, img) {
       }
     }
 }
-
-function agachada(){
+function agachada(imagen){
     pjAgachado = true;
     // Ajusta la altura del personaje agachado según tus necesidades
     const pjAltura = 0.7; // Reduce la altura a la mitad (ajusta según sea necesario)
@@ -124,13 +127,13 @@ function agachada(){
     agachadoFrame();
 }
 
-function Saltar() {
+function Saltar(imagen, imgSalto) {
     if (!saltando) {
         saltando = true;
         imagen.src = imgSalto;
         //obtiene la posición vertical inicial de la imagen
         const inicioY = imagen.getBoundingClientRect().top;
-        const alturaSalto = 220;//define la altura del salto
+        const alturaSalto = 300;//220;//define la altura del salto
         let ubicacionY = inicioY;//variable para ubicar la posición vertical actual
         const duracionSalto = 500;//define la duración del salto
         //establece un intervalo de tiempo que controla la animación de salto
