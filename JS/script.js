@@ -339,3 +339,31 @@ function moverEsfera2(esfera, dir, PJReceptor, barravida, contadorVida) {
         }
     }, 20);// La función de intervalo se ejecuta cada 20 milisegundos
 }
+
+function agachada2(imagen) {
+    imagen2.src = imgAgachado;
+    const pjAltura = 0.7;
+    const trasladaPj = 70;
+    const duracion = 500; // Duración en milisegundos (medio segundo)
+    const tiempoInicio = Date.now();
+
+    function agachadoFrame() {
+        const tiempoActual = Date.now();
+        const tiempoTranscurrido = tiempoActual - tiempoInicio;
+
+        if (tiempoTranscurrido < duracion) {
+            const progreso = tiempoTranscurrido / duracion;
+            // Ajusta la escala en el eje Y y la traslación en función del progreso
+            imagen.style.transform = `scaleY(${pjAltura}) translateY(${trasladaPj}px)`;
+            // Llama a requestAnimationFrame para seguir actualizando la animación
+            requestAnimationFrame(agachadoFrame);
+        } else {
+            // El tiempo de agacharse ha terminado, vuelve a la posición original
+            imagen.style.transform = 'scaleY(1) translateY(0)';
+            imagen.src = imageOriginal2;
+        }
+    }
+
+    // Iniciar el bucle de animación
+    agachadoFrame();
+}
