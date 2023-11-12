@@ -42,7 +42,6 @@ document.addEventListener('keydown', function(event) {
         Saltar(imagen, imgSalto);
     }
     if (event.key === "q" || event.key === "Q") {
-        imagen.src = imgPoder;
         //obtener el tiempo actual
         const currentTime = Date.now();
         //verificar si ha pasado suficiente tiempo desde la última ejecución
@@ -51,7 +50,7 @@ document.addEventListener('keydown', function(event) {
         const PJReceptor='personaje2';
 	    const barravida2 = 'vidaJugador2';
         const contadorVida2 = 'contadorVida2';
-        crearEsfera(personajeid, 0, "+", PJReceptor, barravida2, contadorVida2);
+        crearEsfera(personajeid, 0, "+", PJReceptor, barravida2, contadorVida2, imagen, imgPoder, imageOriginal);
         //actualizar el tiempo de última ejecución
         ultimaEjecucionQ = currentTime;
         }
@@ -206,7 +205,7 @@ function moverEsfera(esfera, dir, PJReceptor, barravida, contadorVida) {
             esferaDimension.top <= PJDimension.bottom
         ) {
             // La esfera ha colisionado con el personaje receptor
-            vidaJugador2 -= 20; // Reduce la vida del jugador receptor
+            vidaJugador2 -= 7; // Reduce la vida del jugador receptor
             disminuirVida(vidaJugador2, contadorVida, barravida); // Actualiza la barra de vida del jugador receptor
             esfera.remove(); // Elimina la esfera
             clearInterval(moveInterval); // Detiene el intervalo de movimiento
