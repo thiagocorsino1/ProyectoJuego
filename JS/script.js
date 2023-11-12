@@ -219,20 +219,21 @@ function moverEsfera(esfera, dir, PJReceptor, barravida, contadorVida) {
     }, 20); // La función de intervalo se ejecuta cada 20 milisegundos
 }
 
-function crearGolpe(tiempoInicial) {
+function crearGolpe(tiempoInicial, personaje, posicion, imgG, imagen, imageOriginal) {
+    imagen.src = imgG;
     const tiempoActual = Date.now();
     const duracion = 200; // Duración en milisegundos (200 ms = 0.2 segundos)
     // Calcular el progreso del movimiento
     const progreso = Math.min(1, (tiempoActual - tiempoInicial) / duracion);
     // Calcular la nueva posición basada en el progreso
-    const PosicionNueva = Math.min(progreso * 80, 80); // 80 es la cantidad máxima de movimiento
-    personaje1.style.transform = `translateX(${PosicionNueva}px)`;
+    const PosicionNueva = Math.min(progreso * posicion, posicion); // 80 es la cantidad máxima de movimiento
+    personaje.style.transform = `translateX(${PosicionNueva}px)`;
     // Continuar moviendo si no se alcanza la duración
     if (progreso < 1) {
-        requestAnimationFrame(() => crearGolpe(tiempoInicial));
+        requestAnimationFrame(() => crearGolpe(tiempoInicial, personaje, posicion, imgG, imagen, imageOriginal));
     } else {
         // Se alcanzó la duración, volver a la posición original
-        personaje1.style.transform = 'translateX(0)';
+        personaje.style.transform = 'translateX(0)';
         //isMoving = false;
         imagen.src = imageOriginal;
     }
