@@ -56,13 +56,12 @@ document.addEventListener('keydown', function(event) {
         }
     }
     if (event.key === 'e' || event.key === 'E') {
-        imagen.src = imgGolpe;
        //obtener el tiempo actual
        const tiempoActual = Date.now();
        //verificar si ha pasado suficiente tiempo desde la última ejecución
        if (tiempoActual - ultimaEjecucionE >= 500) { // Permitir ejecución cada 5000 milisegundos (5 segundos)
             //ejecutar la función asociada a la tecla "E"
-            ejecutarGolpe();
+            ejecutarGolpe(personaje1, 80, imgGolpe, imagen, imageOriginal);
             //actualizar el tiempo de última ejecución
             ultimaEjecucionE = tiempoActual;
        }
@@ -239,13 +238,13 @@ function crearGolpe(tiempoInicial, personaje, posicion, imgG, imagen, imageOrigi
     }
 }
 
-function ejecutarGolpe() {
+function ejecutarGolpe(personaje, posicion, imgG, imagen, imageOriginal) {
     // Comenzar el movimiento hacia la derecha y registrar el tiempo de inicio
     const tiempoInicial = Date.now();
-    crearGolpe(tiempoInicial);
+    crearGolpe(tiempoInicial, personaje, posicion, imgG, imagen, imageOriginal);
     const barravida2 = 'vidaJugador2';
     const contadorVida2 = 'contadorVida2';
-    verificarGolpe(personaje1, personaje2, barravida2, contadorVida2);
+    verificarGolpe(personaje1, personaje2, barravida2, contadorVida2, 5);
 }
 
 function verificarGolpe(personajeEmisor, personajeReceptor, barravida, contadorVida) {
