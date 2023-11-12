@@ -399,3 +399,15 @@ function ejecutarGolpeAleatorio() {
     const contadorVida1 = 'contadorVida1';
     verificarGolpe(personaje2, personaje1, barravida1, contadorVida1, 20);//ultimo item para cambiar la vida a restar
 }
+
+function accionesAleatoriasPersonaje2() {
+    const accionesPosibles = [
+        moverAleatorio,
+        saltarAleatorio,
+        agacharseAleatorio,
+        lanzarEsferaAleatorio,
+        ejecutarGolpeAleatorio
+    ];
+    const accionAleatoria = accionesPosibles[Math.floor(Math.random() * accionesPosibles.length)];
+    accionAleatoria();
+}
