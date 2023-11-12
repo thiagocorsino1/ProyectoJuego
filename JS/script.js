@@ -373,3 +373,7 @@ function moverAleatorio() {
     const movimientoAleatorio = movimientos[Math.floor(Math.random() * movimientos.length)];
     moverPersonaje2(movimientoAleatorio, movimientoAleatorio > 0 ? imgMovDER : imgMovIZQ, imagen2);
 }
+
+function saltarAleatorio() {
+    Saltar(imagen2, imgSalto2, imageOriginal2);
+}
