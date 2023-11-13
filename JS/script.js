@@ -27,21 +27,21 @@ let ultimaEjecucionE = 0;
 
 document.addEventListener('keydown', function(event) { 
     var tecla = event.keyCode;
-    if (event.key === "a" || event.key === "A") {
+    if (event.key === "h" || event.key === "H") {//h
       moverPersonaje(personaje1, personaje2, -30, imgMovIZQ, imagen);
     }
-    if (event.key === "d" || event.key === "D") {
+    if (event.key === "k" || event.key === "K") {//k
       moverPersonaje(personaje1, personaje2, 10,imgMovDER, imagen);
     }
-    if (event.key === "s" || event.key === "S") {
+    if (event.key === "j" || event.key === "J") {//j
         teclaSPresionada = true;
         imagen.src = imgAgachado;
         agachada(imagen);
     }
-    if (event.key === "w" || event.key === "W") {
+    if (event.key === "u" || event.key === "U") {//u
         Saltar(imagen, imgSalto);
     }
-    if (event.key === "q" || event.key === "Q") {
+    if (event.key === "y" || event.key === "Y") {//y
         //obtener el tiempo actual
         const currentTime = Date.now();
         //verificar si ha pasado suficiente tiempo desde la última ejecución
@@ -55,7 +55,7 @@ document.addEventListener('keydown', function(event) {
         ultimaEjecucionQ = currentTime;
         }
     }
-    if (event.key === 'e' || event.key === 'E') {
+    if (event.key === 'i' || event.key === 'I') {//i
        //obtener el tiempo actual
        const tiempoActual = Date.now();
        //verificar si ha pasado suficiente tiempo desde la última ejecución
@@ -69,10 +69,10 @@ document.addEventListener('keydown', function(event) {
 });
 
 document.addEventListener('keyup', (event) => {
-    if (event.key === 'a' || event.key === 'A' || event.key === 'd' || event.key === 'D' || event.key === 'q' || event.key === 'Q') {
+    if (event.key === 'h' || event.key === 'H' || event.key === 'k' || event.key === 'K' || event.key === 'y' || event.key === 'Y') {
       imagen.src = imageOriginal;  // Volver a la imagen original al soltar la tecla
     }
-    if (event.key === 's' || event.key === 'S') {
+    if (event.key === 'j' || event.key === 'J') {
         teclaSPresionada = false;
         // Cancelar el temporizador de agachamiento
         clearTimeout(tiempoAgachado);
