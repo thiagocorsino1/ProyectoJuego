@@ -25,8 +25,15 @@ let vidaJugador2 = 100;
 let ultimaEjecucionQ = 0;
 let ultimaEjecucionE = 0;
 
+
+let juegoDetenido = false;
+
 document.addEventListener('keydown', function(event) { 
     var tecla = event.keyCode;
+    if (juegoDetenido) {
+        return; // Si el juego está detenido, no ejecutar ninguna acción
+    }
+
     if (event.key === "h" || event.key === "H") {//h
       moverPersonaje(personaje1, personaje2, -30, imgMovIZQ, imagen);
     }
@@ -59,7 +66,7 @@ document.addEventListener('keydown', function(event) {
        //obtener el tiempo actual
        const tiempoActual = Date.now();
        //verificar si ha pasado suficiente tiempo desde la última ejecución
-       if (tiempoActual - ultimaEjecucionE >= 500) { // Permitir ejecución cada 5000 milisegundos (5 segundos)
+       if (tiempoActual - ultimaEjecucionE >= 500) { 
             //ejecutar la función asociada a la tecla "E"
             ejecutarGolpe(personaje1, 80, imgGolpe, imagen, imageOriginal);
             //actualizar el tiempo de última ejecución
@@ -152,12 +159,33 @@ function Saltar(imagen, imgSalto) {
 }
 
 function disminuirVida(vidaJugador, contadorVida, barravida) {
-    //verifica si la vida del jugador es menor que cero
     if (vidaJugador < 0) vidaJugador = 0;
-    //actualiza el ancho visual de la barra de vida en el DOM
+    //actualiza el ancho visual de la barra de vida
     document.getElementById(barravida).style.width = vidaJugador + '%';
-    //actualiza el marcador de vida en el DOM con el valor actualizado
+    //actualiza el marcador de vida con el valor actualizado
     document.getElementById(contadorVida).innerText = vidaJugador;
+
+    if (vidaJugador === 0) {
+        //redirige a otro HTML cuando la vida del jugador es llega cero
+        // muestra el cartel
+        document.getElementById('cartel').style.display = 'block';
+        juegoDetenido = true;
+    }
+}
+
+function disminuirVida2(vidaJugador, contadorVida, barravida) {
+    if (vidaJugador < 0) vidaJugador = 0;
+    //actualiza el ancho visual de la barra de vida
+    document.getElementById(barravida).style.width = vidaJugador + '%';
+    //actualiza el marcador de vida con el valor actualizado
+    document.getElementById(contadorVida).innerText = vidaJugador;
+
+    if (vidaJugador === 0) {
+        //redirige a otro HTML cuando la vida del jugador es llega cero
+        // muestra el cartel
+        document.getElementById('cartel2').style.display = 'block';
+        juegoDetenido = true;
+    }
 }
 
 function crearEsfera(personajeid, n, dir, PJReceptor, barravida, contadorVida, imagen, img) {
@@ -204,7 +232,7 @@ function moverEsfera(esfera, dir, PJReceptor, barravida, contadorVida) {
             esferaDimension.top <= PJDimension.bottom
         ) {
             // La esfera ha colisionado con el personaje receptor
-            vidaJugador2 -= 7; // Reduce la vida del jugador receptor
+            vidaJugador2 -= 3; // Reduce la vida del jugador receptor
             disminuirVida(vidaJugador2, contadorVida, barravida); // Actualiza la barra de vida del jugador receptor
             esfera.remove(); // Elimina la esfera
             clearInterval(moveInterval); // Detiene el intervalo de movimiento
@@ -221,15 +249,35 @@ function moverEsfera(esfera, dir, PJReceptor, barravida, contadorVida) {
 function crearGolpe(tiempoInicial, personaje, posicion, imgG, imagen, imageOriginal) {
     imagen.src = imgG;
     const tiempoActual = Date.now();
-    const duracion = 200; // Duración en milisegundos (200 ms = 0.2 segundos)
+    const duracion = 200; //Duración en milisegundos(0.2 segundos)
     // Calcular el progreso del movimiento
     const progreso = Math.min(1, (tiempoActual - tiempoInicial) / duracion);
     // Calcular la nueva posición basada en el progreso
-    const PosicionNueva = Math.min(progreso * posicion, posicion); // 80 es la cantidad máxima de movimiento
+    const PosicionNueva = Math.min(progreso * posicion, posicion);
     personaje.style.transform = `translateX(${PosicionNueva}px)`;
     // Continuar moviendo si no se alcanza la duración
     if (progreso < 1) {
         requestAnimationFrame(() => crearGolpe(tiempoInicial, personaje, posicion, imgG, imagen, imageOriginal));
+    } else {
+        // Se alcanzó la duración, volver a la posición original
+        personaje.style.transform = 'translateX(0)';
+        //isMoving = false;
+        imagen.src = imageOriginal;
+    }
+}
+
+function crearGolpe2(tiempoInicial, personaje, posicion, imgG, imagen, imageOriginal) {
+    imagen.src = imgG;
+    const tiempoActual = Date.now();
+    const duracion = 200; //Duración en milisegundos(0.2 segundos)
+    // Calcular el progreso del movimiento
+    const progreso = Math.min(1, (tiempoActual - tiempoInicial) / duracion);
+    // Calcular la nueva posición basada en el progreso
+    const PosicionNueva = Math.min(progreso * posicion, posicion);
+    personaje.style.transform = `translateX(${PosicionNueva}px)`;
+    // Continuar moviendo si no se alcanza la duración
+    if (progreso < 1) {
+        requestAnimationFrame(() => crearGolpe2(tiempoInicial, personaje, posicion, imgG, imagen, imageOriginal));
     } else {
         // Se alcanzó la duración, volver a la posición original
         personaje.style.transform = 'translateX(0)';
@@ -247,6 +295,15 @@ function ejecutarGolpe(personaje, posicion, imgG, imagen, imageOriginal) {
     verificarGolpe(personaje1, personaje2, barravida2, contadorVida2, 5);
 }
 
+function ejecutarGolpe2(personaje, posicion, imgG, imagen, imageOriginal) {
+    // Comenzar el movimiento hacia la derecha y registrar el tiempo de inicio
+    const tiempoInicial = Date.now();
+    crearGolpe2(tiempoInicial, personaje, posicion, imgG, imagen, imageOriginal);
+    const barravida2 = 'vidaJugador2';
+    const contadorVida2 = 'contadorVida2';
+    verificarGolpe2(personaje1, personaje2, barravida2, contadorVida2, 8);
+}
+
 function verificarGolpe(personajeEmisor, personajeReceptor, barravida, contadorVida, N) {
     const pjEmisor = personajeEmisor.getBoundingClientRect();
     const pjReceptor = personajeReceptor.getBoundingClientRect();
@@ -254,6 +311,16 @@ function verificarGolpe(personajeEmisor, personajeReceptor, barravida, contadorV
     if (pjEmisor.right >= pjReceptor.left && pjEmisor.left <= pjReceptor.right) {
         vidaJugador2 -=N;
         disminuirVida(vidaJugador2, contadorVida, barravida); // Caja1 golpea a caja2, reducir vida
+    }
+}
+
+function verificarGolpe2(personajeEmisor, personajeReceptor, barravida, contadorVida, N) {
+    const pjEmisor = personajeEmisor.getBoundingClientRect();
+    const pjReceptor = personajeReceptor.getBoundingClientRect();
+    // Verificar si caja1 está a la izquierda y cerca de caja2
+    if (pjEmisor.right >= pjReceptor.left && pjEmisor.left <= pjReceptor.right) {
+        vidaJugador2 -=N;
+        disminuirVida2(vidaJugador2, contadorVida, barravida); // Caja1 golpea a caja2, reducir vida
     }
 }
 
@@ -326,8 +393,8 @@ function moverEsfera2(esfera, dir, PJReceptor, barravida, contadorVida) {
         ) {
             // La esfera ha colisionado con el personaje receptor
     
-            vidaJugador2 -= 2; // Reduce la vida del jugador receptor
-            disminuirVida(vidaJugador2, contadorVida, barravida); // Actualiza la barra de vida del jugador receptor
+            vidaJugador2 -= 5; // Reduce la vida del jugador receptor
+            disminuirVida2(vidaJugador2, contadorVida, barravida); // Actualiza la barra de vida del jugador receptor
             esfera.remove(); // Elimina la esfera
             clearInterval(moveInterval); // Detiene el intervalo de movimiento
         }
@@ -394,13 +461,16 @@ function lanzarEsferaAleatorio() {
 function ejecutarGolpeAleatorio() {
     // Comenzar el movimiento hacia la derecha y registrar el tiempo de inicio
     const tiempoInicial = Date.now();
-    crearGolpe(tiempoInicial, personaje2, -80, imgGolpe2, imagen2, imageOriginal2);
+    crearGolpe2(tiempoInicial, personaje2, -80, imgGolpe2, imagen2, imageOriginal2);
     const barravida1 = 'vidaJugador1';
     const contadorVida1 = 'contadorVida1';
-    verificarGolpe(personaje2, personaje1, barravida1, contadorVida1, 20);//ultimo item para cambiar la vida a restar
+    verificarGolpe2(personaje2, personaje1, barravida1, contadorVida1, 20);//ultimo item para cambiar la vida a restar
 }
 
 function accionesAleatoriasPersonaje2() {
+    if (juegoDetenido) {
+        return; // Si el juego está detenido, no ejecutar ninguna acción
+    }
     const accionesPosibles = [
         moverAleatorio,
         saltarAleatorio,

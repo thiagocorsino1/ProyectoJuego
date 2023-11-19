@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nivel 1</title>
+    <title>Dragon Ball Z Super Butoden</title>
     <link rel="stylesheet" href="CSS/style.css">
 </head>
 <body>
     <div id="contenedor">
         <div class="marcador marcador1">
-            <span class="nombre-jugador">Jugador 1</span>
+            <span class="nombre-jugador">Goku</span>
             <div class="barra-vida">
               <div id="vidaJugador1" class="vida"></div>
             </div>
@@ -17,7 +17,7 @@
         </div>
 
         <div class="marcador marcador2">
-            <span class="nombre-jugador">Jugador 2</span>
+            <span class="nombre-jugador">Goku 2</span>
             
             <div class="barra-vida">
               <div id="vidaJugador2" class="vida"></div>
@@ -27,6 +27,22 @@
         <div id="personaje1"><img src="IMG/personajeEstatico.png" alt="" id="imagen"></div>
         <div id="esfera-container"></div>
         <div id="personaje2"><img src="IMG/personajeEstatico2.png" alt="" id="imagen2"></div>
+
+        <div id="cartel" class="cartel-container" style="display: none;">
+            <p>¡Ganaste!</p>
+            <a href="inicio.html">
+                <p>Volver al Inicio</p>
+            </a>
+        </div>
+        <div id="cartel2" class="cartel-container" style="display: none;">
+            <p>¡Perdiste!</p>
+            <a href="inicio.html">
+                <p>Volver al Inicio</p>
+            </a>
+            <a href="nivel1.html">
+                <p>Reiniciar</p>
+            </a>
+        </div>
     </div>
     <script src="JS/script.js"></script>
 </body>
